@@ -85,10 +85,11 @@ Add Compound
             {!! Form::file('img', null, array('placeholder' => 'Image','class' => 'form-control')) !!}
         </div>
     </div>
-    <div class="form-group row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
             <label for="name" class="col-md-4 col-form-label text-md-right">Project</label>
             <div class="col-md-6">
-                {!! Form::select('project_id', $project,[], array('class' => 'form-control','multiple')) !!}
+                {!! Form::select('project_id', $project,[], array('class' => 'form-control')) !!}
                 @if ($errors->has('name'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('name') }}</strong>
@@ -96,6 +97,8 @@ Add Compound
                 @endif
             </div>
         </div>
+        </div>
+        <br>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Add</button>
 </div>
@@ -114,7 +117,7 @@ Add Compound
 
 
 
-
+</div>
 
 
  <!-- /.content -->

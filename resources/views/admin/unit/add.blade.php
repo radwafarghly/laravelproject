@@ -83,6 +83,23 @@ Add Compound
             {!! Form::number('price', null, array('placeholder' => 'price','class' => 'form-control')) !!}
         </div>
     </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group ">
+                <label for="stauts" class="col-md-4 col-form-label text-md-right">Stauts</label>
+
+                <div class="col-md-6">
+                        {!! Form::select('stauts', array('0' => 'open' , '1' => 'close'), array('placeholder' => 'Stauts','class' => 'form-control')) !!}
+                    
+
+                    @if ($errors->has('stauts'))
+                        <span class="invalid-feedback">
+                            <strong>{{ $errors->first('stauts') }}</strong>
+                        </span>
+                    @endif
+                </div>
+    </div>
+    </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Floor</strong>

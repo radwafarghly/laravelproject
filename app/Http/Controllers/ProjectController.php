@@ -169,18 +169,32 @@ class ProjectController extends Controller
        WHERE projects.name='نتتااااااااالاتنمك'*/
        /*projects=select *from projects
      where projects.name='jjjj'*/
-
-       $comp=DB::table('projects')
+     /* $compound=DB::table('compounds')
        ->join('compounds','compounds.project_id','=','projects.id')
        ->select('projects.city AS pro_city','compounds.name AS comp_name','compounds.location AS comp_location','compounds.img AS comp_img')
        ->where('projects.name',$project_name)
-       ->get();
-       return view('user.showDetailsProj',compact('project_name','comp'));
+       ->get();*/
+
+    /* SELECT projects.governate ,projects.img ,projects.city ,projects.name from projects WHERE projects.name ='radwa'*/
+   /*   $projects=DB::table('projects')
+        ->select('projects.name')->get();*/
+      $projects=Project::with('compound')->get();
+      $project=DB::table('projects')
+      ->select('projects.governate','projects.img','projects.city')
+      ->where('projects.name',$project_name)
+      ->get();
+            /*select compounds.name ,compounds.location  ,compounds.img from compounds JOIN projects ON projects.id=compounds.project_id WHERE projects.name='radwa'
+            */ 
+        $compounds=DB::table('compounds')
+        ->join('projects','projects.id','=','compounds.project_id')
+        ->select('compounds.name','compounds.location','compounds.img')
+        ->where('projects.name',$project_name)
+        ->get();
+      
+       return view('user.showproject',compact('project_name','compounds','project','projects'));
    }
 
-   public function showDetailsPro2(){
-    return view('user.showproject');
 
-   }
+   
    
 }

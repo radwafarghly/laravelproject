@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Project;
 
 class LoginController extends Controller
 {
@@ -36,4 +37,16 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+       /*    public function index(){
+        
+              /*  $projects=DB::table('projects')
+                ->select('projects.name')->get();
+                $projects=Project::with('compound')->get();
+                
+        
+                return view('auth.login',compact('projects'));
+                
+                
+        
+           } */
 }

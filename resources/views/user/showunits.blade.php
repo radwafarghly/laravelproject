@@ -46,35 +46,42 @@ Project
 
 
 <div class="container">
+@foreach($unit as $unit)
+
         <div class="row">
               <div class="col-md-6">
                     <div class="word">
-                        <h3>Size: </h3>
-                        <h3>Price: </h3>
-                        <h3>Rooms: </h3>
-                        <h3>Floor Number: </h3>
-                        <h3>City: </h3>
-                        <h3>Building Number: </h3>
-                        <h3>Compound Name: </h3>
-                        <h3>Project Name: </h3>
-                        <h3>Extra: </h3>
+                         <h1> Size:<span> {{$unit->size }}</span></h1>
+                        <h2>  Price: <span> {{ $unit-> price }} </span> <span> LE </span></h2>
+                        <h2> Rooms:<span> {{ $unit-> rooms }} </span></h2>
+                        <h3>Floor Number: <span> {{ $unit-> floor }} </span></h3>
+                        <h3>City: <span> {{ $unit-> pro_city }} </span></h3>
+                        @if(($unit->status) == 0)
+                        <h3>Status:<span> Open </span>  </h3>
+                        @else
+                        <h3>Status:<span> Close </span>  </h3>
+                       @endif
+                        <h3>Building Number:<span> {{ $unit-> bu_num }} </span></h3>
+                        <h3>Compound Name:<span> {{ $unit-> com_name }} </span> </h3>
+                        <h3>Project Name: <span> {{ $unit-> pro_name }} </span> </h3>
+                        <h3>Extra:<span> {{ $unit-> extra }} </span>  </h3>
+                     
                    </div>
 
                </div>
 
 
             <div class="col-md-6">
-
-
-                <img class ="pro" src="https://media1.popsugar-assets.com/files/thumbor/Uk5FcX4wOwofQyHCYfPI-0S8It0/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2016/04/04/825/n/1922794/e2666e80e43f7421_Britney-Spears-Home-For-Sale-In-Thousand-Oaks-CA-Exterior-2/i/bird-eye-view-compound-reveals-just-how-big.jpg"   > 
-
+                <img class ="pro" src="/storage/image/{{ $unit->img }}"> 
             </div>
       </div>
+      @endforeach 
 </div>
 
 
 
 <div class="container">
+
           <div class="row">
                       <div class="col-md-2">
                       </div>
@@ -83,15 +90,20 @@ Project
 
                       <div class="col-md-2">
 
-                      <h1 class="book" >$150.000</h1>
+                      <h1 class="book" ><span> {{ $unit-> price }} </span></h1>
                       </div>
+                      
                       <div class="col-md-2">
-                            <button class="butt">Book</button>
+                           <a class="btn btn-primary butt" href="#">Book</a>
+
                       </div>
             </div>
 
 
 </div>
-
+{{--<?php 
+print_r($unit);
+?>
+--}}
 
 @endsection

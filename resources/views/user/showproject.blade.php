@@ -113,115 +113,78 @@ $(document).ready(function() {
 
 
 <div class="container">
+@foreach($project as $project)
       <div class="row">
             <div class="col-md-6">
                 <div class="word">
-                        <h1> Project Name : Radwa </h1>
-                        <h2> Project City : Ahmed </h2>
-                        <h3>Description</h3>
+                
 
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Esse libero, natus vel dolor atque officia veniam nisi fugiat est quibusdam praesentium incidunt aspernatur illo cumque neque minima ipsum ex error?</p>
+                        <h1> Project Name :<span> {{$project_name }}</span></h1>
+                        <h2> Project City : <span> {{ $project-> city }} </span></h2>
+                        <h2> Project Governate:<span> {{ $project-> governate }} </span></h2> 
                 </div>
 
-            </div>
-
-
+           </div>
             <div class="col-md-6">
-
-
-                      <img class ="pro" src="https://media1.popsugar-assets.com/files/thumbor/Uk5FcX4wOwofQyHCYfPI-0S8It0/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2016/04/04/825/n/1922794/e2666e80e43f7421_Britney-Spears-Home-For-Sale-In-Thousand-Oaks-CA-Exterior-2/i/bird-eye-view-compound-reveals-just-how-big.jpg"   > 
-
-
-
+                      <img class ="pro" src="/storage/image/{{ $project->img }}" > 
             </div>
+      </div>
+@endforeach
 </div>
-</div>
+{{--
+@foreach($compounds as $compound)
+                        <h1> compound Name :<span> {{$compound->name }}</span></h1>
+                        <h2>  location : <span> {{ $compound-> location }} </span></h2>
+                        <h2> img:<span> {{ $compound-> img }} </span></h2>
+@endforeach
 
+@foreach ($compounds->chunk(3) as $chunk)
+    <div class="row">
+          @foreach($chunk as $compound)
+                  <h1> compound Name :<span> {{$compound->name }}</span></h1>
+                  <h2>  location : <span> {{ $compound-> location }} </span></h2>
+                  <h2> img:<span> {{ $compound-> img }} </span></h2>
+          @endforeach
+    </div>
+@endforeach--}}
 
 <!-- SLIDER -->
 
 
 
 <div class="container">
-  <div class="row">
-    <h2 class="detail">Our Compounds</h2>
-  </div>
-  <div class='row'>
-    <div class='col-md-12'>
-      <div class="carousel slide media-carousel" id="media">
-        <div class="carousel-inner">
-          <div class="item  active">
-            <div class="row">
-              <div class="col-md-4">
-                <a class="thumbnail" href="{{url('/compound')}}"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
+    <div class="row">
+        <h2 class="detail">{{$project_name }} Compounds</h2>
+      </div>
+      <div class='row'>
+            <div class='col-md-12'>
+                  <div class="carousel slide media-carousel" id="media">
 
-              </div>          
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
+                        <div class="carousel-inner">
+                        @foreach ($compounds->chunk(3) as $key => $chunk)
 
-              </div>
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-
-              </div>        
+                                <div class="item{{ $key == 0 ? ' active' : '' }}">
+                                        <div class="row">
+                                            @foreach($chunk as $compound)
+                                              <div class="col-md-4">
+                                                <a class="thumbnail" href="{{ route('showcompound',array('compound_name'=> $compound->name)) }}"><img alt="" src="/storage/image/{{ $compound->img }}"></a>
+                                                <p class="detail">{{$compound->name }}</p>
+                                                <p class="detail">{{$compound->location }}</p>
+                                              </div> 
+                                              @endforeach  
+                                        </div>
+                                       
+                                </div>
+                                @endforeach
+                        </div>
+                      
+                    <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+                    <a data-slide="next" href="#media" class="right carousel-control">›</a>
+                  </div>                          
             </div>
-          </div>
-          <div class="item">
-            <div class="row">
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-              </div>          
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-
-              </div>
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-
-              </div>        
-            </div>
-          </div>
-          <div class="item">
-            <div class="row">
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-
-              </div>          
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-
-              </div>
-              <div class="col-md-4">
-                <a class="thumbnail" href="#"><img alt="" src="http://placehold.it/150x150"></a>
-                <p class="detail">Name</p>
-                <p class="detail">Location</p>
-
-              </div>      
-            </div>
-          </div>
-        </div>
-        <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
-        <a data-slide="next" href="#media" class="right carousel-control">›</a>
-      </div>                          
-    </div>
-  </div>
+      </div>                         
 </div>
+  
 
 
 

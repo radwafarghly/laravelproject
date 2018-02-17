@@ -30,23 +30,24 @@ Buildingg panel
   </ol>
   </div>
 
-<div class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                    
-	@if ($message = Session::get('success'))
 
-    <div class="alert alert-success">
+  <div class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Hover Data Table</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+                
+@if ($message = Session::get('success'))
 
-        <p>{{ $message }}</p>
+<div class="alert alert-success">
 
-    </div>
+    <p>{{ $message }}</p>
+
+</div>
 
 @endif
               
@@ -68,6 +69,8 @@ Buildingg panel
                             <th>Rooms</th>
                             <th>Extra</th>
                             <th>Building</th>
+                            <th>Status</th>  
+
 
                             <th width="280px">Action</th>
                 
@@ -88,15 +91,17 @@ Buildingg panel
                         <td>{{ $unit->rooms }}</td>
                         <td>{{ $unit->extra }}</td>
                         <td>{{ $unit->building_id }}</td>
+                        @if(($unit->status) == 0)
+                              <td>open</td>
+                            @else
+                              <td>close</td>
+                            
+                    @endif
                            <td>
-                
+              
                 
                             <a class="btn btn-primary" href="{{ route('unit.edit',$unit->id) }}">Edit</a>
-                
-                            
-                
-                          
-                
+              
                             {!! Form::open(['method' => 'DELETE','route' => ['unit.destroy', $unit->id],'style'=>'display:inline']) !!}
                 
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

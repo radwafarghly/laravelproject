@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contact;
 use DB;
+use App\Project;
 class ContactController extends Controller
 {
     public function index(Request $request)
@@ -18,9 +19,10 @@ class ContactController extends Controller
 
     }
     public function create(){
-
-        $projects=DB::table('projects')
-        ->select('projects.name')->get();
+        $projects=Project::with('compound')->get();
+        
+      /*  $projects=DB::table('projects')
+        ->select('projects.name')->get();*/
 
         return view('user.contact',compact('projects'));
 

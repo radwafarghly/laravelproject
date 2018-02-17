@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
-    public $fillable = ['number','size','price','floor','img','rooms','extra','user_id','building_id'];
+    public $fillable = ['number','size','price','floor','img','rooms','extra','user_id','building_id','status'];
     
     public function building()
     {

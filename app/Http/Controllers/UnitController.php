@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Unit;
 use App\Building;
 use DB;
+use App\Project;
 
 class UnitController extends Controller
 {
@@ -51,6 +52,7 @@ class UnitController extends Controller
             'floor' => 'required',
             'img' => 'required',
             'rooms' => 'required',
+            'stauts'=>'required',            
             'extra' => 'required',
             'building_id' => 'required',
     
@@ -76,6 +78,7 @@ class UnitController extends Controller
          $unit->price = $request->input('price');
          $unit->floor = $request->input('floor');
          $unit->rooms = $request->input('rooms');
+         $unit->status = $request->input('status');
          $unit->extra = $request->input('extra');
          $unit->building_id = $request->input('building_id');
          $unit->img = $request->input('img');         
@@ -139,6 +142,7 @@ class UnitController extends Controller
             'img' => 'required',
             'rooms' => 'required',
             'extra' => 'required',
+            'status'=>'required',
             'building_id' => 'required',
         ]);
         if($request->hasFile('img')){
@@ -157,6 +161,7 @@ class UnitController extends Controller
         $unit->price = $request->input('price');
         $unit->floor = $request->input('floor');
         $unit->rooms = $request->input('rooms');
+        $unit->status = $request->input('status');
         $unit->extra = $request->input('extra');
         $unit->building_id = $request->input('building_id');
         $unit->img=$fileNameStore;
@@ -186,9 +191,30 @@ class UnitController extends Controller
 
 
 
-    public function showDetailsUnit()
+    public function showDetailsUnit($compound_name,$building_number,$unit_number)
     {
+       /* $projects=DB::table('projects')
+        ->select('projects.name')->get();*/
+        $projects=Project::with('compound')->get();
 
-        return view ('user.showunits');
+/*select units.number units.size ,units.price ,units.floor, units.status ,units.rooms ,units.img ,units.extra ,projects.name as pro_name ,buildings.number,compounds.name as com_name 
+from projects 
+join compounds on projects.id= compounds.project_id 
+join buildings ON compounds.id=buildings.compound_id
+JOIN units on buildings.id=units.building_id 
+WHERE buildings.number=10 
+AND units.number=1 
+and compounds.name='assuit'*/
+        $unit=DB::table('projects')
+        ->join('compounds','projects.id','=','compounds.project_id')
+        ->join('buildings','compounds.id','=','buildings.compound_id')
+        ->join('units','buildings.id','=','units.building_id')
+        ->select('units.number','units.size','units.price','units.floor','units.status','units.rooms','units.img','units.extra','projects.name AS pro_name','buildings.number AS bu_num','compounds.name as com_name','projects.governate AS pro_governate','projects.city AS pro_city')
+        ->where('buildings.number',$building_number)
+        ->where('compounds.name',$compound_name)
+        ->where('units.number',$unit_number)
+        ->get();
+
+        return view ('user.showunits',compact('projects','unit_number','building_number','compound_name','unit'));
     }
 }

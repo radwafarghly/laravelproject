@@ -163,8 +163,27 @@ class CompoundController extends Controller
 
 
 
-    public function showDetailsCom(){
+    public function showDetailsCom($compound_name){
+        $projects=Project::with('compound')->get();
         
-                return view ('user.showcompound');
+     /*   $projects=DB::table('projects')
+        ->select('projects.name')->get();*/
+  /*select compounds.name ,compounds.location ,compounds.img FROM compounds WHERE compounds.name='cairo'
+*/
+        $compound =DB::table('compounds')
+        ->select('compounds.name','compounds.location','compounds.img')
+        ->where('compounds.name',$compound_name)
+        ->get();
+        /*SELECT units.size ,units.price ,units.img from units join buildings ON buildings.id =units.building_id JOIN compounds ON compounds.id =buildings.compound_id where compounds.name='assuit'
+*/
+        $units=DB::table('units')
+        ->join('buildings','buildings.id','=','units.building_id')
+        ->join('compounds','compounds.id','=','buildings.compound_id')
+        ->select('units.size','units.price','units.img','units.number','buildings.number As bu_num')
+        ->where('compounds.name',$compound_name)
+        ->get();
+
+
+        return view ('user.showcompound',compact('projects','compound_name','compound','units'));
             }
 }
