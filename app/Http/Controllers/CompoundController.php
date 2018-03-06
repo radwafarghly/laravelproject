@@ -16,7 +16,7 @@ class CompoundController extends Controller
      */
     public function index(Request $request)
     {
-        $compound = Compound::orderBy('id','DESC')->paginate(5);
+        $compound = Compound::orderBy('id','DESC')->paginate(200);
 
         return view('admin.compound.index',compact('compound'))
 

@@ -38,7 +38,7 @@ About Us
             <div class="col-xs-12">
             <div class="col-md-4 col-sm-6 col-xs-12">    
                 <div class="aboutus-image float-left hidden-sm">
-                <img src="http://www.resultsmdceuticals.com/wp-content/uploads/2017/06/Fancy-Nice-Modern-Houses-46-In-Home-Designing-Inspiration-with-Nice-Modern-Houses-600x400.jpg" alt="" style="height: 413px;"></div>
+                <img src="{{ asset('img/1.jpg')}}" alt="" style="height: 413px;"></div>
                 </div>
             <div class="col-md-8 col-sm-6 col-xs-12">
                 <div class="aboutus-content " >

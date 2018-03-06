@@ -84,12 +84,12 @@ Add Compound
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+   {{--<div class="col-xs-12 col-sm-12 col-md-12">
     <div class="form-group ">
-                <label for="stauts" class="col-md-4 col-form-label text-md-right">Stauts</label>
+                <label for="stauts" class="col-md-4 col-form-label text-md-right">status</label>
 
                 <div class="col-md-6">
-                        {!! Form::select('stauts', array('0' => 'open' , '1' => 'close'), array('placeholder' => 'Stauts','class' => 'form-control')) !!}
+                        {!! Form::select('status', array('0' => 'open' , '1' => 'close'), array('placeholder' => 'status','class' => 'form-control')) !!}
                     
 
                     @if ($errors->has('stauts'))
@@ -99,7 +99,7 @@ Add Compound
                     @endif
                 </div>
     </div>
-    </div>
+    </div> --}}
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Floor</strong>
@@ -109,7 +109,8 @@ Add Compound
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Image</strong>
-            {!! Form::file('img', null, array('placeholder' => 'Image','class' => 'form-control')) !!}
+            <!-- {!! Form::file('img', null, array('placeholder' => 'Image','class' => 'form-control')) !!} -->
+            <input type="file" name="img[]" class="form-control" multiple>  
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">

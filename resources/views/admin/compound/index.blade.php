@@ -22,7 +22,7 @@ Project panel
 
 <div class="content-header">
   <h1>
-    Data Tables
+    All compounds
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{ url('/adminpanel') }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +35,7 @@ Project panel
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title">Our compounds</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

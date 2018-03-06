@@ -14,8 +14,8 @@ use App\Http\Requests\AddUserRequestAdmin;
 class UsersController extends Controller
 {
     public function index(User $user){
-        $user = $user->all();
 
+        $user = $user->all();
         return view('admin.user.index', compact('user'));
     }
 
@@ -199,9 +199,9 @@ class UsersController extends Controller
             })
             
             ->editColumn('control', function ($model) {
-                $all = '<a href="' . url('/adminpanel/users/' . $model->id . '/edit') . '" class="btn btn-info btn-circle"><i class="fa fa-edit"></i></a> ';
+                $all = '<a href="' . url('/adminpanel/users/' . $model->id . '/edit') . '" class="btn btn-info btn-circle"><i class="fa fa-edit"></i> Edit</a> ';
                 if($model->id != 1){
-                    $all .= '<a href="' . url('/adminpanel/users/' . $model->id . '/delete') . '" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i></a>';
+                    $all .= '<a href="' . url('/adminpanel/users/' . $model->id . '/delete') . '" class="btn btn-danger btn-circle"><i class="fa fa-trash-o"></i> Delete</a>';
                 }
                 return $all;
             })

@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
 
 Route::group(['middleware'=> ['web' , 'admin']] , function(){
 # datatable ajax
@@ -148,6 +147,13 @@ Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/contact', 'ContactController@create')->name('contact');
 
 Route::post('contact',['as'=>'contact.store','uses'=>'ContactController@store']);//,'middleware' => ['permission:unit-create']
+//Route::get('/test', 'TestController@testbook');
+
+//Route::resource('/queries', 'TestController');
+
+
+Route::get('queries',['as'=>'queries.index','uses'=>'TestController@index']);
+
 
 
 
@@ -168,6 +174,14 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 
 
 
+#show project
 Route::get('showproject/{project_name}', 'ProjectController@showDetailsPro')->name('showproject');
+#show compound
 Route::get('showcompound/{compound_name}', 'CompoundController@showDetailsCom')->name('showcompound');
-Route::get('/showunits/{compound_name}/{building_number}/{unit_number}', 'UnitController@showDetailsUnit')->name('showunits');
+#show unit
+Route::get('showunits/{compound_name}/{building_number}/{unit_number}', 'UnitController@showDetailsUnit')->name('showunits');
+#book unit
+Route::get('book/{compound_name}/{building_number}/{unit_number}/{unit_id}','BookController@bookunit')->name('book');
+Route::get('/profile', 'BookController@index')->name('profile');
+Route::get('bookdelete/{book_id}', 'BookController@deletebook')->name('bookdelete');
+

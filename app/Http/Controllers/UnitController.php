@@ -17,7 +17,7 @@ class UnitController extends Controller
      */
     public function index(Request $request)
     {
-        $unit = Unit::orderBy('id','DESC')->paginate(5);
+        $unit = Unit::orderBy('id','DESC')->paginate(200);
         
                 return view('admin.unit.index',compact('unit'))
         
@@ -52,7 +52,7 @@ class UnitController extends Controller
             'floor' => 'required',
             'img' => 'required',
             'rooms' => 'required',
-            'stauts'=>'required',            
+                 
             'extra' => 'required',
             'building_id' => 'required',
     
@@ -78,7 +78,6 @@ class UnitController extends Controller
          $unit->price = $request->input('price');
          $unit->floor = $request->input('floor');
          $unit->rooms = $request->input('rooms');
-         $unit->status = $request->input('status');
          $unit->extra = $request->input('extra');
          $unit->building_id = $request->input('building_id');
          $unit->img = $request->input('img');         
@@ -142,7 +141,6 @@ class UnitController extends Controller
             'img' => 'required',
             'rooms' => 'required',
             'extra' => 'required',
-            'status'=>'required',
             'building_id' => 'required',
         ]);
         if($request->hasFile('img')){
@@ -161,7 +159,6 @@ class UnitController extends Controller
         $unit->price = $request->input('price');
         $unit->floor = $request->input('floor');
         $unit->rooms = $request->input('rooms');
-        $unit->status = $request->input('status');
         $unit->extra = $request->input('extra');
         $unit->building_id = $request->input('building_id');
         $unit->img=$fileNameStore;
@@ -209,12 +206,15 @@ and compounds.name='assuit'*/
         ->join('compounds','projects.id','=','compounds.project_id')
         ->join('buildings','compounds.id','=','buildings.compound_id')
         ->join('units','buildings.id','=','units.building_id')
-        ->select('units.number','units.size','units.price','units.floor','units.status','units.rooms','units.img','units.extra','projects.name AS pro_name','buildings.number AS bu_num','compounds.name as com_name','projects.governate AS pro_governate','projects.city AS pro_city')
+        ->select('units.id','units.number','units.size','units.price','units.floor','units.rooms','units.img','units.extra','projects.name AS pro_name','buildings.number AS bu_num','compounds.name as com_name','projects.governate AS pro_governate','projects.city AS pro_city','units.user_id')
         ->where('buildings.number',$building_number)
         ->where('compounds.name',$compound_name)
         ->where('units.number',$unit_number)
         ->get();
 
-        return view ('user.showunits',compact('projects','unit_number','building_number','compound_name','unit'));
+        $current_userid = \Auth::user()->id;        
+                
+
+        return view ('user.showunits',compact('projects','unit_number','building_number','compound_name','unit','current_userid'));
     }
 }

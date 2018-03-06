@@ -25,60 +25,7 @@ Project
 
 /*Slider*/
 
-/* carousel */
-.media-carousel 
-{
-  margin-bottom: 0;
-  padding: 0 40px 30px 40px;
-  margin-top: 30px;
-}
-/* Previous button  */
-.media-carousel .carousel-control.left 
-{
-  left: -12px;
-  background-image: none;
-  background: none repeat scroll 0 0 #222222;
-  border: 4px solid #FFFFFF;
-  border-radius: 23px 23px 23px 23px;
-  height: 40px;
-  width : 40px;
-  margin-top: 30px
-}
-/* Next button  */
-.media-carousel .carousel-control.right 
-{
-  right: -12px !important;
-  background-image: none;
-  background: none repeat scroll 0 0 #222222;
-  border: 4px solid #FFFFFF;
-  border-radius: 23px 23px 23px 23px;
-  height: 40px;
-  width : 40px;
-  margin-top: 30px
-}
-/* Changes the position of the indicators */
-.media-carousel .carousel-indicators 
-{
-  right: 50%;
-  top: auto;
-  bottom: 0px;
-  margin-right: -19px;
-}
-/* Changes the colour of the indicators */
-.media-carousel .carousel-indicators li 
-{
-  background: #c0c0c0;
-}
-.media-carousel .carousel-indicators .active 
-{
-  background: #333333;
-}
-.media-carousel img
-{
-  width: 250px;
-  height: 100px
-}
-/* End carousel */
+
 
 
 
@@ -117,16 +64,26 @@ $(document).ready(function() {
       <div class="row">
             <div class="col-md-6">
                 <div class="word">
+
+                <table class="table  table-bordered">
+                <tr>
                 
 
-                        <h1> Project Name :<span> {{$project_name }}</span></h1>
-                        <h2> Project City : <span> {{ $project-> city }} </span></h2>
-                        <h2> Project Governate:<span> {{ $project-> governate }} </span></h2> 
+                        <th> Project Name </th>
+                        <th> Project City </th>
+                </tr>
+                <tr>
+                <tbody>
+                        <td><span> {{$project_name }}</span></td>
+                        <td><span> {{ $project-> city }} </span></td>
+                        </tbody>        
+                </tr>
+                </table>
                 </div>
 
            </div>
             <div class="col-md-6">
-                      <img class ="pro" src="/storage/image/{{ $project->img }}" > 
+                      <img class ="pro" src="{{ asset('/storage/image/'.$project->img) }}" > 
             </div>
       </div>
 @endforeach
@@ -158,18 +115,19 @@ $(document).ready(function() {
       </div>
       <div class='row'>
             <div class='col-md-12'>
-                  <div class="carousel slide media-carousel" id="media">
 
-                        <div class="carousel-inner">
+                       
                         @foreach ($compounds->chunk(3) as $key => $chunk)
 
                                 <div class="item{{ $key == 0 ? ' active' : '' }}">
                                         <div class="row">
                                             @foreach($chunk as $compound)
                                               <div class="col-md-4">
-                                                <a class="thumbnail" href="{{ route('showcompound',array('compound_name'=> $compound->name)) }}"><img alt="" src="/storage/image/{{ $compound->img }}"></a>
-                                                <p class="detail">{{$compound->name }}</p>
-                                                <p class="detail">{{$compound->location }}</p>
+                                                <a class="thumbnail" href="{{ route('showcompound',array('compound_name'=> $compound->name)) }}"><img style="height:300px" alt="" src="{{ asset('/storage/image/'.$compound->img) }}"></a>
+                                                <div style="font-size:18px; position: absolute;
+                                top:7; left:22px; text-align:center; cursor:pointer; background-color:rgba(0,255,0,0.3); color: #fff; padding:5px;" class="detail">{{$compound->name }}</div>
+                                                <div style="font-size:18px; position: absolute;  color: #fff;
+                                top:60; left:22px; text-align:center; cursor:pointer; background-color:rgba(0,255,0,0.3); padding:5px;" class="detail">{{$compound->location }}</div>
                                               </div> 
                                               @endforeach  
                                         </div>
@@ -177,13 +135,10 @@ $(document).ready(function() {
                                 </div>
                                 @endforeach
                         </div>
-                      
-                    <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
-                    <a data-slide="next" href="#media" class="right carousel-control">›</a>
+                
                   </div>                          
             </div>
-      </div>                         
-</div>
+ 
   
 
 

@@ -22,8 +22,8 @@ class CreateUnitsTable extends Migration
             $table->string('img');
             $table->integer('rooms');
             $table->string('extra');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->integer('user_id')->unsigned()->nullable();
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->integer('building_id')->unsigned();
             $table->foreign('building_id')->references('id')->on('buildings'); 
             $table->timestamps();

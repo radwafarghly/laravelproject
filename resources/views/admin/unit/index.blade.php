@@ -66,10 +66,9 @@ Buildingg panel
                             <th>Price</th>
                             <th>Floor</th>
                             <th>Image</th>
-                            <th>Rooms</th>
-                            <th>Extra</th>
+                            
                             <th>Building</th>
-                            <th>Status</th>  
+                          {{-- <th>Status</th>--}}   
 
 
                             <th width="280px">Action</th>
@@ -88,15 +87,14 @@ Buildingg panel
                         <td>{{ $unit->price }} <span>LE</span></td>
                         <td>{{ $unit->floor }}</td>
                         <td>{{ $unit->img }}</td>
-                        <td>{{ $unit->rooms }}</td>
-                        <td>{{ $unit->extra }}</td>
                         <td>{{ $unit->building_id }}</td>
-                        @if(($unit->status) == 0)
+                      {{--  @if(($unit->status) == 0)
                               <td>open</td>
                             @else
                               <td>close</td>
                             
                     @endif
+                    --}}
                            <td>
               
                 

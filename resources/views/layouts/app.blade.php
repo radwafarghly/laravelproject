@@ -10,77 +10,55 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Units Website @yield('title')</title>
+    <title>Units Website | @yield('title')</title>
 
 
-  
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-
-
-$(function() {
-  /**
-  * NAME: Bootstrap 3 Multi-Level by Johne
-  * This script will active Triple level multi drop-down menus in Bootstrap 3.*
-  */
-  $('li.dropdown-submenu').on('click', function(event) {
-      event.stopPropagation(); 
-      if ($(this).hasClass('open')){
-          $(this).removeClass('open');
-      }else{
-          $('li.dropdown-submenu').removeClass('open');
-          $(this).addClass('open');
-     }
-  });
-});
-
-
-
-
-
-</script>
+  
     
-
+@yield('header');
    
 </head>
-<body id="app-layout">
-<nav class="navbar navbar-default" role="navigation" style="margin:5px; border:#33596b; background-color:#33596b;">
-<div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="navbar-brand" href="{{url('home')}}" style="color:#00d857; font-size:30px"><span style="font-size: 35px">3</span>Qarat</a>
-</div>
+<body style="background-color:#eee;" id="app-layout">
 
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-  <ul class="nav navbar-nav">
-    
-      @include('layouts.nav')
+<nav style="background-color:#09c; font-size:18px;"  class="navbar navbar-inverse">
+  <div class="container-fluid">
 
  
-  </ul>
+    <ul style="position:relative; left:200px;" class="nav navbar-nav">
+      <li class="active"><a style="padding-right: 85px; background-color:#09c;" href="{{url('home')}}">Home</a></li>
+      <li><a style="padding-right: 85px; color:#fff;" href="#"  style="color font-size:15px">Services</a></li>
 
 
-
-
-
-
-
-  
-   <ul class="nav navbar-nav navbar-right" style="padding-right:15px">
+<li class="dropdown">
+    <a style="padding-right: 85px; color:#fff;" href="#" data-toggle="dropdown" class="dropdown-toggle"> Projects <b class="caret"></b></a>
+    <ul class="dropdown-menu" id="menu1">
+    @foreach($projects as $project)
+      <li>
+        <a href="{{ route('showproject',$project->name) }}">{{$project->name}}<i class="icon-arrow-right"></i></a>
+              <ul class="dropdown-menu sub-menu">
+             @foreach($project->compound as $compound)
+                <li><a href="{{ route('showcompound',array('compound_name'=> $compound->name)) }}">{{$compound->name}} </a></li>
+                @endforeach
+              </ul>
+      </li>
+      @endforeach
+    </ul>
+  </li>
+  <li><a style="padding-right: 85px; color: #fff; " href="{{url('/about')}}">About Us</a></li>
+    <li><a style="padding-right: 85px; color: #fff;" href="{{url('/contact')}}">Contact Us</a></li>
+    </ul>
+    <ul class="nav navbar-nav  navbar-right" style="padding-right:15px">
    @if (Auth::guest())
 
       <li><a href="{{ route('login') }}" style="color:#00d857; border:1px solid #375d6f; padding:5px 7px; margin:8px; font-size:15px">Login</a></li>
       <li><a href="{{ route('register') }}" style="color:#00d857; border:1px solid #375d6f; padding:4px 6px; margin:8px; font-size:15px">Register</a></li>
       @else
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style=" font-size:20px; color:#1fbe5e">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" style=" font-size:20px; color:#fff">
             {{ Auth::user()->name }} <span class="caret"></span>
         </a>
 
@@ -121,50 +99,25 @@ $(function() {
 
       
     </ul>
-    </div>
+    
+
+  
   </div>
 </nav>
 
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
+<div id="app">
 
 
                       
         @yield('content')
-
-
-
-
-<div id="app">
 
         <div class="footer-section">
     <div class="footer1">
 	<div class="container">
 		    <div class="col-md-4 footer-one">
 		      <div class="foot-logo">
-		          <img class="logo" src="https://www.alaskarealestate.com/images/logo/logo_graphic_250h.png" style="width: 100%" >
+		          <img class="logo" src="{{ asset('images/logo.png') }}" style="width: 100%" >
 		      </div> 
 		       
 		       <p> Thank you for visiting our site <br>
@@ -224,7 +177,31 @@ $(function() {
 
 
 
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
 
+
+$(function() {
+  /**
+  * NAME: Bootstrap 3 Multi-Level by Johne
+  * This script will active Triple level multi drop-down menus in Bootstrap 3.*
+  */
+  $('li.dropdown-submenu').on('click', function(event) {
+      event.stopPropagation(); 
+      if ($(this).hasClass('open')){
+          $(this).removeClass('open');
+      }else{
+          $('li.dropdown-submenu').removeClass('open');
+          $(this).addClass('open');
+     }
+  });
+});
+
+
+
+
+
+</script>
 
     <!-- Scripts -->
 </body>
