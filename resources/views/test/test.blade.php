@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-{!! Form::open(array('rout' => 'queries.index' ,'method'=>'GET','class'=>'form navbar-form navbar-right searchform')) !!}
+{!! Form::open(array('route' => 'queries.index' ,'method'=>'GET','class'=>'form navbar-form navbar-right searchform')) !!}
     {!! Form::text('search', null, array('required','class'=>'form-control','placeholder'=>'Search')) !!}
      {!! Form::submit('Search',array('class'=>'btn btn-default')) !!}
  {!! Form::close() !!}

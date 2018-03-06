@@ -189,4 +189,32 @@ class BookController extends Controller
             ->with('success','Book Delete successfully');
     }
 
+    public function bookdetails()
+    {
+
+
+        // SELECT units.number As unit_num ,units.price AS unit_price , units.size As unit_size ,projects.name As project_name ,compounds.name As compound_name ,compounds.location As compound_location, buildings.number As building_num ,users.name, users.email 
+        // from projects 
+        // JOIN compounds ON projects.id = compounds.project_id
+        //  JOIN buildings ON compounds.id = buildings.compound_id 
+        //  JOIN units on buildings.id = units.building_id 
+        //  JOIN books on books.unit_id =units.id 
+        // JOIN users on books.user_id=users.id
+        //   ORDER BY books.user_id
+
+        $book_unit=DB::table('projects')
+        ->join('compounds','projects.id','=','compounds.project_id')
+        ->join('buildings','compounds.id','=','buildings.compound_id')
+        ->join('units','buildings.id','=','units.building_id')
+        ->join('books','books.unit_id','=','units.id')
+        ->join('users','books.user_id','=','users.id')
+        ->orderBy('books.user_id')
+        ->select('units.number As unit_num','units.price AS unit_price','units.size As unit_size','projects.name As project_name','compounds.name As compound_name','compounds.location As compound_location','buildings.number As building_num','units.id As unit_id','books.id AS book_id','users.name','users.email')
+        ->get();
+
+        
+        return view('admin.book.index',compact('book_unit'));
+        
+    }
+
 }

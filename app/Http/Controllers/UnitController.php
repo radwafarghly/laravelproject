@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use App\Unit;
 use App\Building;
 use DB;
@@ -57,7 +58,7 @@ class UnitController extends Controller
             'building_id' => 'required',
     
         ]);
-        if($request->hasFile('img')){
+       if($request->hasFile('img')){
             $filenameWithExtension=$request->file("img")->getClientOriginalName();
             
             $fileName=pathinfo( $filenameWithExtension,PATHINFO_FILENAME);
@@ -72,6 +73,24 @@ class UnitController extends Controller
          else{
             $fileNameStore='no_image.jpg';
          }
+
+         
+         
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
          $unit = new Unit;
          $unit->number = $request->input('number');        
          $unit->size = $request->input('size');
@@ -212,9 +231,7 @@ and compounds.name='assuit'*/
         ->where('units.number',$unit_number)
         ->get();
 
-        $current_userid = \Auth::user()->id;        
-                
-
-        return view ('user.showunits',compact('projects','unit_number','building_number','compound_name','unit','current_userid'));
+            
+        return view ('user.showunits',compact('projects','unit_number','building_number','compound_name','unit'));
     }
 }

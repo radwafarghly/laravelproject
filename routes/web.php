@@ -135,6 +135,8 @@ Route::delete('/adminpanel/units/{id}/delete',['as'=>'unit.destroy','uses'=>'Uni
 Route::get('/adminpanel/contact',['as'=>'contact.index','uses'=>'ContactController@index']);//,'middleware' => ['permission:unit-list|unit-create|unit-edit|unit-delete']]);
 Route::delete('/adminpanel/contact/{id}/delete',['as'=>'contact.destroy','uses'=>'ContactController@destroy']);//,'middleware' => ['permission:unit-delete']
 
+#route  book
+Route::get('/adminpanel/book',['as'=>'book.index','uses'=>'BookController@bookdetails']);//,'middleware' => ['permission:unit-list|unit-create|unit-edit|unit-delete']]);
 
 });
 

@@ -61,12 +61,8 @@ My Profile
         <td style="text-align: center;">{{ $book_unit->compound_name }}</</td>
         <td style="text-align: center;">{{ $book_unit->compound_location }}</</td>
         <td style="text-align: center;">{{ $book_unit->book_id }}</</td>
-
-        <td>   
-            
+        <td>      
           <a class="btn btn-danger" href="{{ route('bookdelete',array('book_id'=>$book_unit->book_id)) }}">Delete</a>   
-
-
         </td>
       </tr>
     @endforeach

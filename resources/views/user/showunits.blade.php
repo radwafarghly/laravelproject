@@ -85,10 +85,7 @@ Project
                    </div>
 
                </div>
-
-                       {{$current_userid }}
                         <div style="position:relative; left:700px;">
-
                         <a class="btn btn-primary" href="{{ route('book',array('compound_name'=> $compound_name,'building_number'=> $unit->bu_num,'unit_number'=> $unit->number,'unit_id' => $unit->id)) }}">Book</a>
 
                         </div>
